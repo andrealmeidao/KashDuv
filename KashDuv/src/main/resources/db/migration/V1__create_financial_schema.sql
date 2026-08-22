@@ -1,0 +1,3 @@
+CREATE TABLE usuario (id VARCHAR(36) PRIMARY KEY, username VARCHAR(100) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL);
+CREATE TABLE despesa (id VARCHAR(36) PRIMARY KEY, descricao VARCHAR(255), valor DECIMAL(19,2), categoria VARCHAR(100), data DATE, criado_em DATE, usuario_id VARCHAR(36) NOT NULL, CONSTRAINT fk_despesa_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id));
+CREATE TABLE receita (id VARCHAR(36) PRIMARY KEY, descricao VARCHAR(255), valor DECIMAL(19,2), categoria VARCHAR(100), data DATE, criado_em DATE, usuario_id VARCHAR(36) NOT NULL, CONSTRAINT fk_receita_usuario FOREIGN KEY (usuario_id) REFERENCES usuario(id));

@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class DespesaDTO {
+    private String id;
 
     @NotBlank(message = "Descrição não pode estar vazia")
     private String descricao;
@@ -29,4 +30,6 @@ public class DespesaDTO {
     @NotNull(message = "Data não pode ser nula")
     @PastOrPresent(message = "Data não pode ser no futuro")
     private LocalDate data;
+
+    private LocalDate criadoEm;
 }
