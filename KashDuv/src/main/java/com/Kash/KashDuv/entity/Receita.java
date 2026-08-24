@@ -2,14 +2,15 @@ package com.Kash.KashDuv.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.PrePersist;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +33,7 @@ public class Receita {
 
     private LocalDate data;
 
-    private LocalDate criadoEm;
+    private LocalDateTime criadoEm;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "usuario_id", nullable = false)
@@ -40,6 +41,6 @@ public class Receita {
 
     @PrePersist
     public void prePersist() {
-        this.criadoEm = LocalDate.now();
+        this.criadoEm = LocalDateTime.now();
     }
 }

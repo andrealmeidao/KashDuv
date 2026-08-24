@@ -1,14 +1,17 @@
 package com.Kash.KashDuv.dto;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import com.Kash.KashDuv.validation.CategoriaValida;
+
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -24,11 +27,12 @@ public class ReceitaDTO {
     private BigDecimal valor;
 
     @NotBlank(message = "Categoria não pode estar vazia")
+    @CategoriaValida
     private String categoria;
 
     @NotNull(message = "Data não pode ser nula")
     @PastOrPresent(message = "Data não pode ser no futuro")
     private LocalDate data;
 
-    private LocalDate criadoEm;
+    private java.time.LocalDateTime criadoEm;
 }

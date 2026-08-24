@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+
+**/target/
+**/node_modules/
+**/*.log
+KashDuv/data/

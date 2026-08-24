@@ -1,7 +1,15 @@
 package com.Kash.KashDuv.controller;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
+import org.springframework.http.MediaType;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -9,13 +17,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.Kash.KashDuv.repository.DespesaRepository;
 import com.Kash.KashDuv.repository.ReceitaRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -52,5 +53,16 @@ class DespesaControllerTest {
                 .andExpect(status().isNotFound()).andExpect(jsonPath("$.mensagem").value("Despesa não encontrada"));
         mockMvc.perform(delete("/api/despesas/id-inexistente").with(httpBasic("admin", "test-password")))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void chamadaSemAutenticacaoRetorna401() throws Exception {
+        mockMvc.perform(get("/api/despesas")).andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    void anoOuMesInvalidoRetorna400() throws Exception {
+        mockMvc.perform(get("/api/resumo/2026/13").with(httpBasic("admin", "test-password")))
+                .andExpect(status().isBadRequest()).andExpect(jsonPath("$.mensagem").value("Parâmetro inválido"));
     }
 }

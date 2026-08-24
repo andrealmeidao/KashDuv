@@ -1,20 +1,21 @@
 package com.Kash.KashDuv.service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 
 import com.Kash.KashDuv.dto.DespesaDTO;
 import com.Kash.KashDuv.entity.Despesa;
 import com.Kash.KashDuv.exception.RecursoNaoEncontradoException;
 import com.Kash.KashDuv.repository.DespesaRepository;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Optional;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class DespesaServiceTest {
     private final DespesaRepository repository = Mockito.mock(DespesaRepository.class);
@@ -29,7 +30,7 @@ class DespesaServiceTest {
 
     @Test
     void atualizarAlteraCamposDaDespesaDoUsuario() {
-        Despesa existente = new Despesa(); existente.setId("1"); existente.setCriadoEm(LocalDate.now());
+        Despesa existente = new Despesa(); existente.setId("1"); existente.setCriadoEm(LocalDateTime.now());
         when(repository.findByIdAndUsuarioUsername("1", "ana")).thenReturn(Optional.of(existente));
         when(repository.save(any(Despesa.class))).thenAnswer(invocation -> invocation.getArgument(0));
         DespesaDTO resultado = service.atualizar("1", dto(), "ana");

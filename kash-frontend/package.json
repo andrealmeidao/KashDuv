@@ -2,16 +2,20 @@
   "name": "kash-frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8081",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.18.1",
+    "lucide-react": "^1.33.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-router": "6.30.1",
+    "react-router-dom": "6.30.1",
     "react-scripts": "5.0.1",
-    "recharts": "^3.10.0",
+    "recharts": "^3.10.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -22,8 +26,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {

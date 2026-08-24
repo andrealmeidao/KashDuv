@@ -2,6 +2,7 @@ package com.Kash.KashDuv.mapper;
 
 import com.Kash.KashDuv.dto.DespesaDTO;
 import com.Kash.KashDuv.dto.ReceitaDTO;
+import com.Kash.KashDuv.entity.Categoria;
 import com.Kash.KashDuv.entity.Despesa;
 import com.Kash.KashDuv.entity.Receita;
 
@@ -11,7 +12,7 @@ public final class FinanceiroMapper {
     public static Despesa paraEntidade(DespesaDTO dto) {
         Despesa despesa = new Despesa();
         despesa.setDescricao(dto.getDescricao()); despesa.setValor(dto.getValor());
-        despesa.setCategoria(dto.getCategoria()); despesa.setData(dto.getData());
+        despesa.setCategoria(Categoria.normaliza(dto.getCategoria())); despesa.setData(dto.getData());
         return despesa;
     }
 
@@ -25,7 +26,7 @@ public final class FinanceiroMapper {
     public static Receita paraEntidade(ReceitaDTO dto) {
         Receita receita = new Receita();
         receita.setDescricao(dto.getDescricao()); receita.setValor(dto.getValor());
-        receita.setCategoria(dto.getCategoria()); receita.setData(dto.getData());
+        receita.setCategoria(Categoria.normaliza(dto.getCategoria())); receita.setData(dto.getData());
         return receita;
     }
 
