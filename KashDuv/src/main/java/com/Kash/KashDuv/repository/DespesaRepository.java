@@ -16,8 +16,8 @@ import com.Kash.KashDuv.entity.Despesa;
 @Repository
 public interface DespesaRepository extends JpaRepository<Despesa, String> {
     @Query("SELECT d FROM Despesa d WHERE d.usuario.username = :usuario AND "
-            + "(coalesce(:descricao, '') = '' OR lower(d.descricao) LIKE lower(concat('%', coalesce(:descricao, ''), '%'))) AND "
-            + "(coalesce(:categoria, '') = '' OR lower(d.categoria) = lower(coalesce(:categoria, ''))) AND "
+            + "(coalesce(cast(:descricao as String), '') = '' OR lower(d.descricao) LIKE lower(concat('%', coalesce(cast(:descricao as String), ''), '%'))) AND "
+            + "(coalesce(cast(:categoria as String), '') = '' OR lower(d.categoria) = lower(coalesce(cast(:categoria as String), ''))) AND "
             + "(:inicio IS NULL OR d.data >= :inicio) AND (:fim IS NULL OR d.data <= :fim)")
     Page<Despesa> buscar(@Param("usuario") String usuario, @Param("descricao") String descricao,
                          @Param("categoria") String categoria, @Param("inicio") LocalDate inicio,

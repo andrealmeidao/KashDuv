@@ -15,8 +15,8 @@ import com.Kash.KashDuv.entity.Receita;
 
 public interface ReceitaRepository extends JpaRepository<Receita, String> {
     @Query("SELECT r FROM Receita r WHERE r.usuario.username = :usuario AND "
-            + "(coalesce(:descricao, '') = '' OR lower(r.descricao) LIKE lower(concat('%', coalesce(:descricao, ''), '%'))) AND "
-            + "(coalesce(:categoria, '') = '' OR lower(r.categoria) = lower(coalesce(:categoria, ''))) AND "
+            + "(coalesce(cast(:descricao as String), '') = '' OR lower(r.descricao) LIKE lower(concat('%', coalesce(cast(:descricao as String), ''), '%'))) AND "
+            + "(coalesce(cast(:categoria as String), '') = '' OR lower(r.categoria) = lower(coalesce(cast(:categoria as String), ''))) AND "
             + "(:inicio IS NULL OR r.data >= :inicio) AND (:fim IS NULL OR r.data <= :fim)")
     Page<Receita> buscar(@Param("usuario") String usuario, @Param("descricao") String descricao,
                          @Param("categoria") String categoria, @Param("inicio") LocalDate inicio,
